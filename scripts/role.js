@@ -32,4 +32,22 @@ function addRole(title, salary, departmentId) {
   });
 }
 
-module.exports = { viewRoles, addRole };
+function fetchRolesFromDatabase() {
+  return new Promise((resolve, reject) => {
+    const query = 'SELECT id, title FROM role';
+    connection.query(query, (err, roles) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(roles);
+      }
+    });
+  });
+}
+
+
+module.exports = { 
+  viewRoles,
+   addRole,
+   fetchRolesFromDatabase
+   };
